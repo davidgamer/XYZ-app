@@ -6,7 +6,7 @@
         <i class="material-icons ">cloud</i></a>
         </div>
       <div class="col s8">
-         <input size="100" type="search" placeholder="Buscar" name="search" id="roundInput">
+         <input v-model="search" size="100" type="search" placeholder="Buscar" name="search" id="roundInput">
       </div>
       <div class="col s2 m2 l2"><i class="material-icons center-align">account_circle</i></div>
 
@@ -23,7 +23,8 @@ export default {
   name: 'searchbar',
       data: () => {
     return {
-        show:true
+        show:true,
+        search:{}
     }
   },
 watch: {
@@ -34,6 +35,13 @@ watch: {
         this.show = true;
     }
   }
+},
+computed: {
+    filteredList() {
+      return this.$store.state.pessoas.filter(post => {
+        return pessoas.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
 }
 }
 </script>
